@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Filomena — Invitaciones</title>
+    <link rel="stylesheet" href="/css/app.css" />
+  </head>
+  <body>
+    <main class="wrap">
+      <header class="brand">
+        <p class="eyebrow">Filomena Studio</p>
+        <h1>Invitaciones</h1>
+      </header>
+
+      <form id="login" class="card">
+        <label>Clave de acceso<input name="secret" type="password" autocomplete="current-password" required /></label>
+        <button type="submit" class="btn">Entrar</button>
+        <p id="login-error" class="err" hidden></p>
+      </form>
+
+      <section id="app" hidden>
+        <p id="flash" class="flash" hidden></p>
+        <form id="create" class="card">
+          <h2>Nueva cortesía</h2>
+          <p class="hint">Sin tope. El QR usa el mismo comando que la cabina (<code>activarPhotobooth</code>).</p>
+          <label>Nombre<input name="name" required autocomplete="name" /></label>
+          <div class="row">
+            <label>Email <span class="opt">(opcional)</span><input name="email" type="email" autocomplete="email" /></label>
+            <label>WhatsApp <span class="opt">(opcional)</span><input name="phone" type="tel" autocomplete="tel" /></label>
+          </div>
+          <button type="submit" class="btn">Crear y generar QR</button>
+        </form>
+
+        <div class="list-head">
+          <h2>Lista</h2>
+          <span id="count"></span>
+        </div>
+        <div class="table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Nombre</th>
+                <th>Contacto</th>
+                <th>Vence</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody id="rows"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+    <script src="/js/admin.js"></script>
+  </body>
+</html>

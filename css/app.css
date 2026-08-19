@@ -1,0 +1,43 @@
+:root {
+  --bg: #0c0c0c;
+  --fg: #f4f1ea;
+  --muted: #8a8680;
+  --line: #2a2a2a;
+  --accent: #c4a574;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; background: var(--bg); color: var(--fg); font: 16px/1.45 "Helvetica Neue", Helvetica, Arial, sans-serif; }
+.wrap { max-width: 720px; margin: 0 auto; padding: 2rem 1.25rem 4rem; }
+.brand { margin-bottom: 2rem; }
+.eyebrow { letter-spacing: 0.28em; text-transform: uppercase; font-size: 0.68rem; color: var(--accent); margin: 0 0 0.4rem; }
+h1 { font-weight: 500; letter-spacing: 0.04em; margin: 0; font-size: 1.8rem; }
+h2 { font-size: 0.85rem; letter-spacing: 0.12em; text-transform: uppercase; margin: 0 0 0.85rem; }
+.card { border: 1px solid var(--line); padding: 1.25rem; margin-bottom: 1.5rem; }
+label { display: grid; gap: 0.35rem; font-size: 0.62rem; letter-spacing: 0.12em; text-transform: uppercase; color: #bbb; margin-bottom: 0.85rem; }
+input { width: 100%; padding: 0.7rem 0.8rem; border: 1px solid #444; background: #111; color: var(--fg); font: inherit; }
+.row { display: grid; grid-template-columns: 1fr 1fr; gap: 0.75rem; }
+@media (max-width: 640px) { .row { grid-template-columns: 1fr; } }
+.opt { letter-spacing: 0; text-transform: none; color: var(--muted); }
+.btn { appearance: none; border: 1px solid var(--fg); background: var(--fg); color: #111; padding: 0.7rem 1.1rem; font: inherit; font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; cursor: pointer; }
+.hint { color: var(--muted); font-size: 0.9rem; margin: 0 0 1rem; }
+.hint code { color: var(--accent); font-size: 0.85em; }
+.err, .flash { color: #e8b4b4; font-size: 0.9rem; }
+.flash { border: 1px solid #553; padding: 0.6rem 0.8rem; margin-bottom: 1rem; }
+.list-head { display: flex; justify-content: space-between; align-items: baseline; margin: 0.5rem 0 0.6rem; }
+#count { color: var(--muted); font-size: 0.85rem; }
+.table-wrap { overflow-x: auto; }
+table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+th { text-align: left; font-size: 0.58rem; letter-spacing: 0.12em; text-transform: uppercase; color: var(--muted); padding: 0.5rem 0.4rem; border-bottom: 1px solid var(--line); }
+td { padding: 0.75rem 0.4rem; border-bottom: 1px solid var(--line); vertical-align: middle; }
+.actions { white-space: nowrap; }
+.actions a, .actions button { font-size: 0.68rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg); background: none; border: 0; border-bottom: 1px solid currentColor; padding: 0; margin-right: 0.7rem; cursor: pointer; font: inherit; text-decoration: none; }
+.actions .danger { color: #c66; }
+.muted { color: var(--muted); font-size: 0.85rem; }
+
+.invite-body { min-height: 100vh; display: grid; place-items: center; }
+.invite { width: min(420px, 92vw); text-align: center; padding: 2rem 1rem; }
+.invite-card { margin-top: 1.25rem; }
+.hello { font-size: 1.15rem; margin: 0 0 0.6rem; }
+.msg { color: #ccc; margin: 0 0 1.4rem; }
+.qr { display: block; width: min(280px, 80vw); height: auto; margin: 0 auto 1rem; background: #fff; padding: 10px; }
+.fine { color: var(--muted); font-size: 0.8rem; }

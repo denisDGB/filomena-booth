@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Tu QR — Filomena</title>
+    <link rel="stylesheet" href="/css/app.css" />
+  </head>
+  <body class="invite-body">
+    <main class="invite">
+      <p class="eyebrow">Filomena Studio</p>
+      <div id="state" class="invite-card">Cargando…</div>
+    </main>
+    <script>
+      (function () {
+        const parts = location.pathname.replace(/\/+$/, "").split("/");
+        const token = parts[parts.length - 1];
+        const el = document.getElementById("state");
+        if (!token || token === "i") {
+          el.textContent = "Invitación no válida.";
+          return;
+        }
+        fetch("/api/invites/" + encodeURIComponent(token))
+          .then((r) => r.json().then((d) => ({ ok: r.ok, d })))
+          .then(({ ok, d }) => {
+            if (!ok || !d.invite) {
+              el.textContent = "Invitación no encontrada.";
+              return;
+            }
+            const name = d.invite.name || "";
+            const qr = "/api/invites/" + encodeURIComponent(token) + "/qr";
+            el.innerHTML =
+              "<p class=\"hello\">Hola" +
+              (name ? ", <strong>" + escapeHtml(name) + "</strong>" : "") +
+              ".</p>" +
+              "<p class=\"msg\">Acerca este QR a la cabina para activarla y tomarte las fotos.</p>" +
+              "<img class=\"qr\" alt=\"Código QR de la cabina\" src=\"" +
+              qr +
+              "\" width=\"280\" height=\"280\" />" +
+              "<p class=\"fine\">Si la pantalla no enfoca, sube el brillo del celular.</p>";
+          })
+          .catch(() => {
+            el.textContent = "No se pudo cargar la invitación.";
+          });
+
+        function escapeHtml(s) {
+          return String(s)
+            .replaceAll("&", "&amp;")
+            .replaceAll("<", "&lt;")
+            .replaceAll(">", "&gt;")
+            .replaceAll('"', "&quot;");
+        }
+      })();
+    </script>
+  </body>
+</html>
