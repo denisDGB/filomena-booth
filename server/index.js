@@ -3,7 +3,7 @@ import { readFile, stat } from "node:fs/promises";
 import { join, extname, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import QRCode from "qrcode";
-import { createInvite, getByToken, listInvites, deleteInvite, publicInvite, markOpened } from "./db.js";
+import { createInvite, getByToken, listInvites, deleteInvite, updateInvite, publicInvite, markOpened } from "./db.js";
 import { issueBoothUrl } from "./booth-url.js";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
@@ -136,6 +136,7 @@ const server = createServer(async (req, res) => {
         });
         res.writeHead(200, {
           "Content-Type": "image/png",
+          "Content-Disposition": 'inline; filename="filomena-qr.png"',
           "Cache-Control": "no-store",
         });
         return res.end(png);
@@ -144,6 +145,18 @@ const server = createServer(async (req, res) => {
       if (method === "GET" && !action) {
         markOpened(token);
         return json(res, 200, { invite: publicInvite(row) });
+      }
+
+      if (method === "PATCH" && !action) {
+        if (!requireAdmin(req, res)) return;
+        const body = await readBody(req);
+        try {
+          const updated = updateInvite(token, body || {});
+          if (!updated) return json(res, 404, { error: "not found" });
+          return json(res, 200, { invite: adminRow(updated), invites: listInvites().map(adminRow) });
+        } catch (e) {
+          return json(res, 400, { error: e.message });
+        }
       }
 
       if (method === "DELETE" && !action) {

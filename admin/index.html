@@ -4,16 +4,26 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Filomena — Invitaciones</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="/css/app.css" />
   </head>
-  <body>
+  <body class="gate">
     <main class="wrap">
       <header class="brand">
-        <p class="eyebrow">Filomena Studio</p>
+        <div class="brand-top">
+          <img class="logo" src="/assets/logo.svg" width="128" height="128" alt="Filomena" />
+          <div class="session" id="session" hidden>
+            <span class="session-user">admin</span>
+            <button type="button" id="logout" class="btn-text">Cerrar sesión</button>
+          </div>
+        </div>
+        <p class="brand-tag">Analog look. Filomena feel.</p>
         <h1>Invitaciones</h1>
       </header>
 
-      <form id="login" class="card">
+      <form id="login" class="gate-form">
         <label>Clave de acceso<input name="secret" type="password" autocomplete="current-password" required /></label>
         <button type="submit" class="btn">Entrar</button>
         <p id="login-error" class="err" hidden></p>
@@ -28,17 +38,37 @@
           <div class="kpi"><div class="n" id="kpi-expired">0</div><div class="l">Vencidas</div></div>
         </section>
         <form id="create" class="card">
-          <h2>Nueva cortesía</h2>
-          <p class="hint">Sin tope. El QR usa el mismo comando que la cabina (<code>activarPhotobooth</code>).</p>
+          <h2 id="form-title">Nueva cortesía</h2>
+          <input type="hidden" name="edit_token" id="edit_token" value="" />
           <label>Nombre<input name="name" required autocomplete="name" /></label>
-          <label>Email <span class="opt">(opcional)</span><input name="email" type="email" autocomplete="email" /></label>
-          <label>WhatsApp <span class="opt">(opcional)</span>
+          <fieldset class="channel">
+            <legend>Contacto</legend>
+            <div class="switch" role="radiogroup" aria-label="Canal de contacto">
+              <label class="switch-opt">
+                <input type="radio" name="channel" value="whatsapp" checked />
+                <span>WhatsApp</span>
+              </label>
+              <label class="switch-opt">
+                <input type="radio" name="channel" value="email" />
+                <span>Email</span>
+              </label>
+              <label class="switch-opt">
+                <input type="radio" name="channel" value="ambos" />
+                <span>Ambos</span>
+              </label>
+            </div>
+          </fieldset>
+          <label data-field="email">Email<input name="email" type="email" autocomplete="email" /></label>
+          <label data-field="whatsapp">WhatsApp
             <div class="phone-row">
               <select name="dial" id="dial" aria-label="Prefijo de país"></select>
-              <input name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Número sin prefijo" />
+              <input name="phone" type="tel" inputmode="numeric" autocomplete="tel" placeholder="999 888 777" />
             </div>
           </label>
-          <button type="submit" class="btn">Crear y generar QR</button>
+          <div class="form-actions">
+            <button type="submit" class="btn" id="form-submit">Crear y generar QR</button>
+            <button type="button" class="btn-text" id="form-cancel" hidden>Cancelar</button>
+          </div>
         </form>
 
         <div class="list-head">
@@ -62,5 +92,6 @@
     </main>
     <script src="/js/country-dials.js"></script>
     <script src="/js/admin.js"></script>
+    <div id="toast" class="toast" hidden role="status" aria-live="polite"></div>
   </body>
 </html>

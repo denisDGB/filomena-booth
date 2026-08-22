@@ -4,44 +4,151 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Tu QR — Filomena</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="/css/app.css" />
   </head>
   <body class="invite-body">
-    <main class="invite">
-      <p class="eyebrow">Filomena Studio</p>
-      <div id="state" class="invite-card">Cargando…</div>
+    <main class="invite" id="invite">
+      <p class="invite-status" id="state">Cargando…</p>
     </main>
     <script>
       (function () {
         const parts = location.pathname.replace(/\/+$/, "").split("/");
         const token = parts[parts.length - 1];
-        const el = document.getElementById("state");
+        const root = document.getElementById("invite");
+        const state = document.getElementById("state");
         if (!token || token === "i") {
-          el.textContent = "Invitación no válida.";
+          state.textContent = "Invitación no válida.";
           return;
         }
+        const qr = "/api/invites/" + encodeURIComponent(token) + "/qr";
         fetch("/api/invites/" + encodeURIComponent(token))
           .then((r) => r.json().then((d) => ({ ok: r.ok, d })))
           .then(({ ok, d }) => {
             if (!ok || !d.invite) {
-              el.textContent = "Invitación no encontrada.";
+              state.textContent = "Invitación no encontrada.";
               return;
             }
             const name = d.invite.name || "";
-            const qr = "/api/invites/" + encodeURIComponent(token) + "/qr";
-            el.innerHTML =
-              "<p class=\"hello\">Hola" +
+            const file = "filomena-qr" + (name ? "-" + slug(name) : "") + ".png";
+            root.innerHTML =
+              '<div class="invite-frame" id="invite-frame">' +
+              '<div class="invite-copy">' +
+              '<img class="logo invite-logo invite-rise" style="--d:0" src="/assets/logo.svg" width="128" height="128" alt="Filomena" />' +
+              '<p class="brand-tag invite-rise" style="--d:1">Analog look. Filomena feel.</p>' +
+              '<p class="invite-eyebrow invite-rise" style="--d:2">Tu cortesía</p>' +
+              '<h1 class="hello invite-rise" style="--d:3">Hola' +
               (name ? ", <strong>" + escapeHtml(name) + "</strong>" : "") +
-              ".</p>" +
-              "<p class=\"msg\">Acerca este QR a la cabina para activarla y tomarte las fotos.</p>" +
-              "<img class=\"qr\" alt=\"Código QR de la cabina\" src=\"" +
+              ".</h1>" +
+              '<p class="msg invite-rise" style="--d:4">Acerca este QR a la cabina para activarla y tomarte las fotos.</p>' +
+              '<button type="button" class="btn invite-download invite-rise" style="--d:5" id="invite-download">Descargar QR</button>' +
+              '<p class="fine invite-rise" style="--d:6">Si la pantalla no enfoca, sube el brillo del celular.</p>' +
+              "</div>" +
+              '<div class="invite-visual invite-rise invite-rise--qr" style="--d:4">' +
+              '<img class="qr" alt="Código QR de la cabina" src="' +
               qr +
-              "\" width=\"280\" height=\"280\" />" +
-              "<p class=\"fine\">Si la pantalla no enfoca, sube el brillo del celular.</p>";
+              '" width="480" height="480" />' +
+              "</div>" +
+              "</div>";
+
+            document.getElementById("invite-download").addEventListener("click", () => {
+              downloadBrandedQr(qr, file).catch(() => {
+                const a = document.createElement("a");
+                a.href = qr;
+                a.download = file;
+                a.click();
+              });
+            });
+
+            requestAnimationFrame(() => {
+              requestAnimationFrame(() => {
+                const frame = document.getElementById("invite-frame");
+                if (frame) frame.classList.add("is-in");
+              });
+            });
           })
           .catch(() => {
-            el.textContent = "No se pudo cargar la invitación.";
+            state.textContent = "No se pudo cargar la invitación.";
           });
+
+        function loadImage(src) {
+          return new Promise((resolve, reject) => {
+            const img = new Image();
+            img.onload = () => resolve(img);
+            img.onerror = reject;
+            img.src = src;
+          });
+        }
+
+        async function downloadBrandedQr(qrUrl, filename) {
+          const [qrImg, logoImg] = await Promise.all([
+            loadImage(qrUrl),
+            loadImage("/assets/logo.svg"),
+          ]);
+
+          const W = 720;
+          const padX = 64;
+          const padTop = 56;
+          const padBot = 64;
+          const logoSize = 104;
+          const gapLogoTag = 20;
+          const tagSize = 18;
+          const gapTagRule = 28;
+          const gapRuleQr = 28;
+          const qrBox = W - padX * 2;
+          const H = padTop + logoSize + gapLogoTag + tagSize + gapTagRule + gapRuleQr + qrBox + padBot;
+
+          const canvas = document.createElement("canvas");
+          canvas.width = W;
+          canvas.height = H;
+          const ctx = canvas.getContext("2d");
+
+          ctx.fillStyle = "#ffffff";
+          ctx.fillRect(0, 0, W, H);
+
+          let y = padTop;
+          ctx.drawImage(logoImg, (W - logoSize) / 2, y, logoSize, logoSize);
+          y += logoSize + gapLogoTag;
+
+          ctx.fillStyle = "#6b6b6b";
+          ctx.font = '400 ' + tagSize + 'px "DM Sans", "Helvetica Neue", Helvetica, Arial, sans-serif';
+          ctx.textAlign = "center";
+          ctx.textBaseline = "top";
+          try {
+            ctx.letterSpacing = "0.08em";
+          } catch (_) {}
+          ctx.fillText("Analog look. Filomena feel.", W / 2, y);
+          y += tagSize + gapTagRule;
+
+          ctx.strokeStyle = "#e5e5e5";
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(padX + 48, y);
+          ctx.lineTo(W - padX - 48, y);
+          ctx.stroke();
+          y += gapRuleQr;
+
+          ctx.drawImage(qrImg, padX, y, qrBox, qrBox);
+
+          const a = document.createElement("a");
+          a.href = canvas.toDataURL("image/png");
+          a.download = filename || "filomena-qr.png";
+          document.body.appendChild(a);
+          a.click();
+          a.remove();
+        }
+
+        function slug(s) {
+          return String(s)
+            .normalize("NFD")
+            .replace(/\p{M}/gu, "")
+            .replace(/[^a-zA-Z0-9]+/g, "-")
+            .replace(/^-|-$/g, "")
+            .toLowerCase()
+            .slice(0, 40);
+        }
 
         function escapeHtml(s) {
           return String(s)

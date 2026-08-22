@@ -70,6 +70,20 @@ export function deleteInvite(token) {
   return info.changes > 0;
 }
 
+export function updateInvite(token, { name, email, phone }) {
+  const row = getByToken(token);
+  if (!row) return null;
+  const cleanName = String(name || "").trim();
+  if (!cleanName) throw new Error("name required");
+  db.prepare(`UPDATE invites SET name = ?, email = ?, phone = ? WHERE token = ?`).run(
+    cleanName,
+    String(email || "").trim().toLowerCase() || null,
+    String(phone || "").replace(/[^\d+]/g, "").trim() || null,
+    token
+  );
+  return getByToken(token);
+}
+
 export function markOpened(token) {
   db.prepare(`UPDATE invites SET opened_at = ? WHERE token = ? AND opened_at IS NULL`).run(
     new Date().toISOString(),

@@ -33,7 +33,12 @@ Hasta que no esté `BOOTH_AUTH_PASSWORD`, el QR se firma con secreto vacío: Ger
 
 ## Deploy
 
-App aparte (Railway). `PUBLIC_URL=https://invitaciones.photobook.com.mx` (o el subdominio que arme Gera). CNAME → el servicio. No se toca el PHP de photobook.com.mx.
+App aparte (Railway). Detalle: [docs/05-env-y-despliegue.md](./docs/05-env-y-despliegue.md).
+
+- Prueba actual: https://filomena-booth-production.up.railway.app/admin  
+- Producción: `PUBLIC_URL=https://invitaciones.photobook.com.mx` (o el subdominio que arme Gera). CNAME → el servicio.  
+- No se toca el PHP de photobook.com.mx.  
+- Mantenimiento acordado: USD 40 / mes (infra Railway la pagan ellos).
 
 ## Qué no hace
 

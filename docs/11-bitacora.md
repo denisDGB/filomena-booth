@@ -42,10 +42,24 @@ Contraseña: se deja **para el final**. QR de pago de muestra: **no lo dan**; pr
 - Firma en servidor; secret en `.env`.
 - Página `/i/` muestra el QR; la cabina lee `thefilomenabooth.pe?…`.
 
+## Firma y hosting (22 ago 2026)
+
+- Gera: no ve problema en compartir el secreto de firma (Opción A: nosotros firmamos; la clave va solo en el servidor).
+- Ellos tienen dominio, **sin** hosting: se pide que nosotros levantemos la app.
+- Acordado: Railway lo pagan ellos; retainer de mantenimiento **USD 40 / mes** (uptime, soporte puntual, ajustes menores; features nuevas aparte).
+- `/admin` es la **ruta** del panel; el subdominio es otro (ej. `invitaciones.…`).
+
+## Railway de prueba (22 ago 2026)
+
+- Servicio vivo: `https://filomena-booth-production.up.railway.app` → panel `/admin`.
+- Root Directory vacío; dominio público en puerto **8080**.
+- Volumen: `filomena-booth-volume` (5 GB) enlazado al servicio. Mount `/data` + `DATA_DIR=/data`.
+- Checklist env: ver [05-env-y-despliegue.md](./05-env-y-despliegue.md).
+
 ## Pendiente
 
-1. `BOOTH_AUTH_PASSWORD` de Gera → regenerar cortesías  
-2. CNAME subdominio + Railway (o equivalente)  
+1. `BOOTH_AUTH_PASSWORD` de Gera → ponerla en Railway → regenerar cortesías  
+2. CNAME del subdominio → servicio Railway + `PUBLIC_URL` final  
 3. Prueba física en cabina  
 4. Logo/copy final de marca  
 5. Si hace falta distinguir cabinas o email del invitado en el JSON: coordinar con Gera (hoy el JSON es el de su snippet, sin campos extra)
