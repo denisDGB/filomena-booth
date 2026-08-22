@@ -1,5 +1,15 @@
 # 10 — Changelog
 
+## 2026-08-22 — Panel en vivo y polling
+
+- Admin: KPIs (creadas / abiertas / pendientes / vencidas) con **poll cada 4 s** + botón actualizar a la derecha (junto al contador de Lista)
+- Avisos (crear / editar / eliminar / copiar WA) en toast inferior izquierdo
+- Canal de contacto: WhatsApp / email / ambos; máscara de teléfono con espacios (estilo PE)
+- Lista: Editar · Abrir · Eliminar; copiar mensaje de WhatsApp al lado del número
+- Invitación `/i/{token}` a ancho completo, fade-in, descarga de QR con logo + tagline
+- Branding: logo `assets/logo.svg`, login centrado, estilo B/N Filomena
+- `PUBLIC_URL` debe incluir `https://` (sin esquema el link Abrir se duplica y da 404 JSON)
+
 ## 2026-08-22 — Deploy Railway (prueba)
 
 - Servicio en Railway: `https://filomena-booth-production.up.railway.app` (panel `/admin`)

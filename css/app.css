@@ -356,10 +356,43 @@ a.contact-wa:hover { border-bottom-color: var(--fg); }
 .list-head {
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
+  align-items: center;
   margin: 0.5rem 0 0.6rem;
   padding-top: 0.5rem;
   border-top: 1px solid var(--line);
+}
+.list-head h2 { margin: 0; }
+.list-head-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.65rem;
+}
+.btn-icon {
+  appearance: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 1.85rem;
+  height: 1.85rem;
+  padding: 0;
+  border: 1px solid var(--fg);
+  background: #fff;
+  color: var(--fg);
+  cursor: pointer;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+.btn-icon:hover {
+  background: var(--fg);
+  color: #fff;
+}
+.btn-icon.is-spinning svg {
+  animation: spin 0.7s linear infinite;
+}
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .btn-icon.is-spinning svg { animation: none; }
 }
 #count { color: var(--muted); font-size: 0.85rem; }
 .table-wrap { overflow-x: auto; }

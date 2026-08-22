@@ -6,7 +6,7 @@
 |----------|-----|
 | `PORT` | Local: 3001. En Railway lo asigna la plataforma (target del dominio: **8080**) |
 | `ADMIN_SECRET` | Clave del panel `/admin` |
-| `PUBLIC_URL` | Base de links `/i/…` (sin `/` final) |
+| `PUBLIC_URL` | Base absoluta de links `/i/…` — **con** `https://`, sin `/` final |
 | `BOOTH_AUTH_PASSWORD` | Secreto de Gera para `sha1`. Vacío = firma `""` (cabina no activa) |
 | `DATA_DIR` | Carpeta SQLite. Railway: `/data` + volumen montado ahí |
 
@@ -41,7 +41,7 @@ Servicio de prueba ya levantado:
    | Variable | Valor |
    |----------|--------|
    | `ADMIN_SECRET` | Clave fuerte (la del login del panel) |
-   | `PUBLIC_URL` | `https://filomena-booth-production.up.railway.app` (luego el subdominio final) |
+   | `PUBLIC_URL` | `https://filomena-booth-production.up.railway.app` (**obligatorio** el `https://`; sin esquema Abrir duplica el host y responde `{"error":"not found"}`) |
    | `BOOTH_AUTH_PASSWORD` | Vacío hasta que Gera la dé |
    | `DATA_DIR` | `/data` |
 
