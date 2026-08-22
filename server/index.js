@@ -3,7 +3,7 @@ import { readFile, stat } from "node:fs/promises";
 import { join, extname, dirname } from "node:path";
 import { fileURLToPath } from "node:url";
 import QRCode from "qrcode";
-import { createInvite, getByToken, listInvites, deleteInvite, publicInvite } from "./db.js";
+import { createInvite, getByToken, listInvites, deleteInvite, publicInvite, markOpened } from "./db.js";
 import { issueBoothUrl } from "./booth-url.js";
 
 const root = join(dirname(fileURLToPath(import.meta.url)), "..");
@@ -72,6 +72,7 @@ function adminRow(row) {
     email: row.email,
     phone: row.phone,
     expiry: row.expiry,
+    opened_at: row.opened_at || null,
     created_at: row.created_at,
     url: invitePageUrl(row.token),
   };
@@ -141,6 +142,7 @@ const server = createServer(async (req, res) => {
       }
 
       if (method === "GET" && !action) {
+        markOpened(token);
         return json(res, 200, { invite: publicInvite(row) });
       }
 

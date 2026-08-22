@@ -26,6 +26,11 @@ db.exec(`
   CREATE INDEX IF NOT EXISTS idx_invites_created ON invites(created_at);
 `);
 
+const inviteCols = db.prepare(`PRAGMA table_info(invites)`).all();
+if (!inviteCols.some((c) => c.name === "opened_at")) {
+  db.exec(`ALTER TABLE invites ADD COLUMN opened_at TEXT`);
+}
+
 function newToken() {
   return randomBytes(16).toString("base64url");
 }
@@ -63,6 +68,13 @@ export function listInvites() {
 export function deleteInvite(token) {
   const info = db.prepare(`DELETE FROM invites WHERE token = ?`).run(token);
   return info.changes > 0;
+}
+
+export function markOpened(token) {
+  db.prepare(`UPDATE invites SET opened_at = ? WHERE token = ? AND opened_at IS NULL`).run(
+    new Date().toISOString(),
+    token
+  );
 }
 
 export function publicInvite(row) {

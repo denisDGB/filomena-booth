@@ -21,14 +21,23 @@
 
       <section id="app" hidden>
         <p id="flash" class="flash" hidden></p>
+        <section class="kpis" aria-label="Estado de las invitaciones">
+          <div class="kpi"><div class="n" id="kpi-total">0</div><div class="l">Creadas</div></div>
+          <div class="kpi"><div class="n" id="kpi-opened">0</div><div class="l">Abiertas</div></div>
+          <div class="kpi"><div class="n" id="kpi-pending">0</div><div class="l">Pendientes</div></div>
+          <div class="kpi"><div class="n" id="kpi-expired">0</div><div class="l">Vencidas</div></div>
+        </section>
         <form id="create" class="card">
           <h2>Nueva cortesía</h2>
           <p class="hint">Sin tope. El QR usa el mismo comando que la cabina (<code>activarPhotobooth</code>).</p>
           <label>Nombre<input name="name" required autocomplete="name" /></label>
-          <div class="row">
-            <label>Email <span class="opt">(opcional)</span><input name="email" type="email" autocomplete="email" /></label>
-            <label>WhatsApp <span class="opt">(opcional)</span><input name="phone" type="tel" autocomplete="tel" /></label>
-          </div>
+          <label>Email <span class="opt">(opcional)</span><input name="email" type="email" autocomplete="email" /></label>
+          <label>WhatsApp <span class="opt">(opcional)</span>
+            <div class="phone-row">
+              <select name="dial" id="dial" aria-label="Prefijo de país"></select>
+              <input name="phone" type="tel" inputmode="tel" autocomplete="tel" placeholder="Número sin prefijo" />
+            </div>
+          </label>
           <button type="submit" class="btn">Crear y generar QR</button>
         </form>
 
@@ -51,6 +60,7 @@
         </div>
       </section>
     </main>
+    <script src="/js/country-dials.js"></script>
     <script src="/js/admin.js"></script>
   </body>
 </html>
