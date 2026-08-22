@@ -318,13 +318,7 @@ a.contact-wa:hover { border-bottom-color: var(--fg); }
 
 .hint { color: var(--muted); font-size: 0.9rem; margin: 0 0 1rem; }
 .hint code { color: var(--fg); font-size: 0.85em; }
-.err, .flash { color: #9a3b3b; font-size: 0.9rem; }
-.flash {
-  border: 1px solid #e8c9c9;
-  background: #fdf6f6;
-  padding: 0.6rem 0.8rem;
-  margin-bottom: 1rem;
-}
+.err { color: #9a3b3b; font-size: 0.9rem; }
 
 .kpis {
   display: grid;

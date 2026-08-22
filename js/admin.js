@@ -3,7 +3,6 @@
   const login = document.getElementById("login");
   const app = document.getElementById("app");
   const session = document.getElementById("session");
-  const flash = document.getElementById("flash");
   const toastEl = document.getElementById("toast");
   const rowsEl = document.getElementById("rows");
   const countEl = document.getElementById("count");
@@ -24,13 +23,15 @@
   function headers() {
     return { "Content-Type": "application/json", "x-admin-secret": secret() };
   }
-  function showFlash(msg) {
-    flash.hidden = !msg;
-    flash.textContent = msg || "";
-  }
 
   function showToast(msg, ok = true) {
     if (toastTimer) clearTimeout(toastTimer);
+    if (!msg) {
+      toastEl.classList.remove("is-on");
+      toastEl.hidden = true;
+      toastEl.textContent = "";
+      return;
+    }
     toastEl.hidden = false;
     toastEl.textContent = msg;
     toastEl.classList.toggle("toast--err", !ok);
@@ -250,10 +251,10 @@
         api("/api/invites/" + encodeURIComponent(btn.getAttribute("data-del")), { method: "DELETE" })
           .then((data) => {
             if (createForm.edit_token.value === btn.getAttribute("data-del")) resetForm();
-            showFlash("Eliminado.");
+            showToast("Eliminado.");
             render(data.invites || []);
           })
-          .catch((err) => showFlash(err.message));
+          .catch((err) => showToast(err.message, false));
       });
     });
   }
@@ -268,7 +269,7 @@
     session.hidden = true;
     login.hidden = false;
     app.hidden = true;
-    showFlash("");
+    showToast("");
     loginError.hidden = true;
     login.secret.value = "";
     resetForm();
@@ -279,7 +280,7 @@
     session.hidden = false;
     login.hidden = true;
     app.hidden = false;
-    refresh().catch((err) => showFlash(err.message));
+    refresh().catch((err) => showToast(err.message, false));
   }
 
   document.getElementById("logout").addEventListener("click", () => {
@@ -423,7 +424,7 @@
           method: "PATCH",
           body: JSON.stringify(payload),
         });
-        showFlash("Cortesía actualizada.");
+        showToast("Cortesía actualizada.");
         resetForm();
         render(data.invites || []);
       } else {
@@ -431,12 +432,12 @@
           method: "POST",
           body: JSON.stringify(payload),
         });
-        showFlash("QR creado. Copia el mensaje de WhatsApp junto al número o ábrelo.");
+        showToast("QR creado. Copia el mensaje de WhatsApp junto al número o ábrelo.");
         resetForm();
         await refresh();
       }
     } catch (err) {
-      showFlash(err.message);
+      showToast(err.message, false);
     }
   });
 
