@@ -55,11 +55,11 @@ Contraseña: se deja **para el final**. QR de pago de muestra: **no lo dan**; pr
 - Root Directory vacío; dominio público en puerto **8080**.
 - Volumen: `filomena-booth-volume` (5 GB) enlazado al servicio. Mount `/data` + `DATA_DIR=/data`.
 - Checklist env: ver [05-env-y-despliegue.md](./05-env-y-despliegue.md).
+- UI panel (mismo día): branding Filomena, canales WA/email, toast, poll de KPIs, invitación full-bleed + QR descargable con marca.
 
 ## Pendiente
 
 1. `BOOTH_AUTH_PASSWORD` de Gera → ponerla en Railway → regenerar cortesías  
-2. CNAME del subdominio → servicio Railway + `PUBLIC_URL` final  
+2. CNAME del subdominio → servicio Railway + `PUBLIC_URL=https://<subdominio>` (siempre con esquema)  
 3. Prueba física en cabina  
-4. Logo/copy final de marca  
-5. Si hace falta distinguir cabinas o email del invitado en el JSON: coordinar con Gera (hoy el JSON es el de su snippet, sin campos extra)
+4. Si hace falta distinguir cabinas o email del invitado en el JSON: coordinar con Gera (hoy el JSON es el de su snippet, sin campos extra)

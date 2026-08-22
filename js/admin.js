@@ -16,6 +16,9 @@
 
   let inviteCache = [];
   let toastTimer = null;
+  let pollTimer = null;
+  let refreshing = false;
+  let lastFingerprint = "";
 
   function secret() {
     return sessionStorage.getItem(KEY) || "";
@@ -252,6 +255,7 @@
           .then((data) => {
             if (createForm.edit_token.value === btn.getAttribute("data-del")) resetForm();
             showToast("Eliminado.");
+            lastFingerprint = fingerprint(data.invites || []);
             render(data.invites || []);
           })
           .catch((err) => showToast(err.message, false));
@@ -259,12 +263,48 @@
     });
   }
 
-  async function refresh() {
-    const data = await api("/api/invites");
-    render(data.invites || []);
+  function fingerprint(invites) {
+    return (invites || [])
+      .map((i) => `${i.token}:${i.opened_at || ""}:${i.expiry || ""}:${i.email || ""}:${i.phone || ""}:${i.name || ""}`)
+      .join("|");
+  }
+
+  async function refresh(opts = {}) {
+    if (refreshing) return;
+    refreshing = true;
+    const btn = document.getElementById("refresh");
+    if (!opts.silent) btn?.classList.add("is-spinning");
+    try {
+      const data = await api("/api/invites");
+      const invites = data.invites || [];
+      const fp = fingerprint(invites);
+      if (opts.silent && fp === lastFingerprint) return;
+      lastFingerprint = fp;
+      render(invites);
+    } finally {
+      refreshing = false;
+      btn?.classList.remove("is-spinning");
+    }
+  }
+
+  function startPolling() {
+    stopPolling();
+    pollTimer = setInterval(() => {
+      if (document.hidden) return;
+      if (document.body.classList.contains("gate")) return;
+      refresh({ silent: true }).catch(() => {});
+    }, 4000);
+  }
+
+  function stopPolling() {
+    if (pollTimer) {
+      clearInterval(pollTimer);
+      pollTimer = null;
+    }
   }
 
   function showGate() {
+    stopPolling();
     document.body.classList.add("gate");
     session.hidden = true;
     login.hidden = false;
@@ -280,8 +320,20 @@
     session.hidden = false;
     login.hidden = true;
     app.hidden = false;
-    refresh().catch((err) => showToast(err.message, false));
+    refresh()
+      .then(startPolling)
+      .catch((err) => showToast(err.message, false));
   }
+
+  document.getElementById("refresh").addEventListener("click", () => {
+    refresh().catch((err) => showToast(err.message, false));
+  });
+
+  document.addEventListener("visibilitychange", () => {
+    if (!document.hidden && !document.body.classList.contains("gate")) {
+      refresh({ silent: true }).catch(() => {});
+    }
+  });
 
   document.getElementById("logout").addEventListener("click", () => {
     sessionStorage.removeItem(KEY);
@@ -426,6 +478,7 @@
         });
         showToast("Cortesía actualizada.");
         resetForm();
+        lastFingerprint = fingerprint(data.invites || []);
         render(data.invites || []);
       } else {
         await api("/api/invites", {
