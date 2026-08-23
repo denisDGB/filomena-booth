@@ -13,24 +13,38 @@
       .replaceAll("'", "&apos;");
   }
 
-  function formatStamp(iso) {
-    if (!iso) return "—";
-    const d = new Date(iso);
-    if (Number.isNaN(d.getTime())) return "—";
+  function toDate(value) {
+    if (value == null || value === "") return null;
+    if (typeof value === "number") {
+      const ms = value < 1e12 ? value * 1000 : value;
+      const d = new Date(ms);
+      return Number.isNaN(d.getTime()) ? null : d;
+    }
+    let s = String(value).trim().replace(" ", "T");
+    if (/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}/.test(s) && !/[zZ]|[+-]\d{2}:?\d{2}$/.test(s)) {
+      s += "Z";
+    }
+    const d = new Date(s);
+    return Number.isNaN(d.getTime()) ? null : d;
+  }
+
+  function formatStamp(value) {
+    const d = toDate(value);
+    if (!d) return "—";
     return d.toLocaleString("es-PE", {
       timeZone: TZ,
       day: "2-digit",
       month: "short",
       year: "numeric",
-      hour: "2-digit",
+      hour: "numeric",
       minute: "2-digit",
-      hour12: false,
+      hour12: true,
     });
   }
 
   function formatExpiry(sec) {
     if (!sec) return "—";
-    return formatStamp(new Date(Number(sec) * 1000).toISOString());
+    return formatStamp(Number(sec) * 1000);
   }
 
   function statusOf(inv, nowSec) {

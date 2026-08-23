@@ -62,8 +62,10 @@
   function fmtExpiry(sec) {
     if (!sec) return "—";
     return new Date(Number(sec) * 1000).toLocaleString("es-PE", {
+      timeZone: "America/Lima",
       dateStyle: "short",
       timeStyle: "short",
+      hour12: true,
     });
   }
   async function copyText(text) {

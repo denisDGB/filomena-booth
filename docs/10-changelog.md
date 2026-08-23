@@ -4,7 +4,7 @@
 
 - Gera entregó `BOOTH_AUTH_PASSWORD` (poner solo en env / Railway; **no** en el repo). Recrear cortesías tras cargarla.
 - Auth confirmado igual al PHP: `sha1(json + password)` → `thefilomenabooth.pe?auth=&j=`
-- Admin: **Descargar** → Excel de invitados (creado, vence, abierto, contacto, link, estado)
+- Admin: **Descargar** → Excel de invitados (creado, vence, abierto, contacto, link, estado; hora Perú 12 h)
 
 ## 2026-08-22 — Panel en vivo y polling
 
