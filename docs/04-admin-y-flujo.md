@@ -24,6 +24,7 @@ Creadas · Abiertas · Pendientes · Vencidas. Se recalculan:
 - **Editar:** carga el formulario (PATCH; no regenera el QR de cabina)
 - **Abrir:** página del invitado
 - **Eliminar:** borra el registro; deja de mostrarse el QR (la cabina no tiene lista nuestra)
+- **Descargar:** Excel `.xlsx` de todas las cortesías (nombre, email, WhatsApp, link, creado, vence, abierto, estado). Horas en zona América/Lima. Generado en el navegador, sin dependencias nuevas.
 
 Avisos de éxito/error: toast abajo a la izquierda (no banner).
 

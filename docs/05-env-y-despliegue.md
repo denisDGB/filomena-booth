@@ -42,7 +42,7 @@ Servicio de prueba ya levantado:
    |----------|--------|
    | `ADMIN_SECRET` | Clave fuerte (la del login del panel) |
    | `PUBLIC_URL` | `https://filomena-booth-production.up.railway.app` (**obligatorio** el `https://`; sin esquema Abrir duplica el host y responde `{"error":"not found"}`) |
-   | `BOOTH_AUTH_PASSWORD` | Vacío hasta que Gera la dé |
+   | `BOOTH_AUTH_PASSWORD` | Secreto de firma de Gera (entregado 23 ago 2026; solo en Variables, no en git). Vacío = firma `""` y la cabina no activa |
    | `DATA_DIR` | `/data` |
 
 2. **Volumen** — confirmado: `filomena-booth-volume` (5 GB) enlazado al servicio `filomena-booth`. Mount path debe ser **`/data`** y variable `DATA_DIR=/data`.
