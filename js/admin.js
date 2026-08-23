@@ -329,6 +329,20 @@
     refresh().catch((err) => showToast(err.message, false));
   });
 
+  document.getElementById("download-xlsx").addEventListener("click", () => {
+    const xlsx = window.FilomenaXlsx;
+    if (!xlsx) {
+      showToast("No se pudo cargar el exportador Excel.", false);
+      return;
+    }
+    const result = xlsx.download(inviteCache);
+    if (!result.ok) {
+      showToast("Aún no hay invitados para descargar.", false);
+      return;
+    }
+    showToast(`Excel descargado (${result.count}).`);
+  });
+
   document.addEventListener("visibilitychange", () => {
     if (!document.hidden && !document.body.classList.contains("gate")) {
       refresh({ silent: true }).catch(() => {});

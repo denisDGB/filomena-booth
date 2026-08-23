@@ -1,5 +1,11 @@
 # 10 — Changelog
 
+## 2026-08-23 — Firma de cabina + Excel
+
+- Gera entregó `BOOTH_AUTH_PASSWORD` (poner solo en env / Railway; **no** en el repo). Recrear cortesías tras cargarla.
+- Auth confirmado igual al PHP: `sha1(json + password)` → `thefilomenabooth.pe?auth=&j=`
+- Admin: **Descargar** → Excel de invitados (creado, vence, abierto, contacto, link, estado)
+
 ## 2026-08-22 — Panel en vivo y polling
 
 - Admin: KPIs (creadas / abiertas / pendientes / vencidas) con **poll cada 4 s** + botón actualizar a la derecha (junto al contador de Lista)

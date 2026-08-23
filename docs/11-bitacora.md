@@ -57,9 +57,17 @@ Contraseña: se deja **para el final**. QR de pago de muestra: **no lo dan**; pr
 - Checklist env: ver [05-env-y-despliegue.md](./05-env-y-despliegue.md).
 - UI panel (mismo día): branding Filomena, canales WA/email, toast, poll de KPIs, invitación full-bleed + QR descargable con marca.
 
+## Firma recibida (23 ago 2026)
+
+- Gera confirmó el protocolo PHP y entregó `BOOTH_AUTH_PASSWORD` (valor solo en `.env` / Railway Variables; no documentar el secreto aquí).
+- `c1` = `activarPhotobooth` (ya estaba). Tras cargar la clave: reiniciar servicio y **recrear** cortesías.
+- Pedidos de alcance (pendientes de armar): logo por ubicación, bloque redes en la invitación (scroll tipo INTEMPO), posible módulo por **eventos** en paralelo; Excel de invitados → incluido en el panel.
+
 ## Pendiente
 
-1. `BOOTH_AUTH_PASSWORD` de Gera → ponerla en Railway → regenerar cortesías  
+1. Poner `BOOTH_AUTH_PASSWORD` en Railway (si aún no) + regenerar cortesías  
 2. CNAME del subdominio → servicio Railway + `PUBLIC_URL=https://<subdominio>` (siempre con esquema)  
 3. Prueba física en cabina  
-4. Si hace falta distinguir cabinas o email del invitado en el JSON: coordinar con Gera (hoy el JSON es el de su snippet, sin campos extra)
+4. Invitación: espacio para logo de venue + redes + scroll hacia el QR  
+5. (Futuro / aparte) multi-evento con historial  
+6. Si hace falta distinguir cabinas o email del invitado en el JSON: coordinar con Gera (hoy el JSON es el de su snippet, sin campos extra)
