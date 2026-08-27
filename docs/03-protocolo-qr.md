@@ -18,10 +18,10 @@ https://thefilomenabooth.pe?auth=<sha1>&j=<json_urlencode>
 Igual que `json_encode` de PHP:
 
 ```json
-{"c1":"activarPhotobooth","autoemail":"noreply@filomena.studio","expiry":1710000000}
+{"c1":"profile6","autoemail":"noreply@filomena.studio","expiry":1710000000}
 ```
 
-- `c1`: comando táctil / arranque (`activarPhotobooth`)
+- `c1`: perfil de cabina (`profile6`; Gera, ago 2026)
 - `autoemail`: envío automático de fotos (hoy fijo `noreply@filomena.studio`)
 - `expiry`: Unix time; ahora + **605000** s (~7 días)
 

@@ -1,5 +1,9 @@
 # 10 — Changelog
 
+## 2026-08-26 — Perfil de cabina en QR
+
+- `c1` pasa de `activarPhotobooth` a `profile6` (confirmado por Gera en prueba de cabina). Recrear cortesías.
+
 ## 2026-08-23 — Firma de cabina + Excel
 
 - Gera entregó `BOOTH_AUTH_PASSWORD` (poner solo en env / Railway; **no** en el repo). Recrear cortesías tras cargarla.

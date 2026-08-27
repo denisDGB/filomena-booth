@@ -9,7 +9,7 @@ const jsonStr = boothJsonString({
   expiry,
 });
 const expectedJson =
-  '{"c1":"activarPhotobooth","autoemail":"noreply@filomena.studio","expiry":1710000000}';
+  '{"c1":"profile6","autoemail":"noreply@filomena.studio","expiry":1710000000}';
 console.assert(jsonStr === expectedJson, jsonStr);
 
 const auth = signBoothJson(jsonStr, "secret");

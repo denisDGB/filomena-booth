@@ -2,7 +2,7 @@
 
 ## Qué es
 
-Panel para que **Angelica (Filomena Studio)** registre invitados de cortesía **sin tope**. Cada persona recibe un link a una página con un **QR**. El invitado acerca el celular a la cabina; el lector integrado lee el QR y **activa la sesión de fotos** (`activarPhotobooth`). Angelica no interviene en la cabina.
+Panel para que **Angelica (Filomena Studio)** registre invitados de cortesía **sin tope**. Cada persona recibe un link a una página con un **QR**. El invitado acerca el celular a la cabina; el lector integrado lee el QR y **activa la sesión de fotos** (`c1=profile6`). Angelica no interviene en la cabina.
 
 Este repo **no** es el concierto INTEMPO. INTEMPO quedó en la rama `main` del repo original; aquí solo vive Filomena.
 
