@@ -60,7 +60,8 @@ Contraseña: se deja **para el final**. QR de pago de muestra: **no lo dan**; pr
 ## Firma recibida (23 ago 2026)
 
 - Gera confirmó el protocolo PHP y entregó `BOOTH_AUTH_PASSWORD` (valor solo en `.env` / Railway Variables; no documentar el secreto aquí).
-- `c1` = `activarPhotobooth` (ya estaba). Tras cargar la clave: reiniciar servicio y **recrear** cortesías.
+- Tras cargar la clave: reiniciar servicio y **recrear** cortesías.
+- **26 ago 2026:** Gera confirma que `c1` debe ser `profile6` (no `activarPhotobooth`). El PHP inicial era referencia; el QR que funciona en cabina usa `c1` = perfil.
 - Pedidos de alcance (pendientes de armar): logo por ubicación, bloque redes en la invitación (scroll tipo INTEMPO), posible módulo por **eventos** en paralelo; Excel de invitados → incluido en el panel.
 
 ## Pendiente

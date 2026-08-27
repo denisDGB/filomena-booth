@@ -29,7 +29,7 @@ Contacto técnico cabina: **Gera** (+51).
 | Quién lee el QR | **Solo la máquina** (el invitado acerca el celular) |
 | Intervención de Angelica en cabina | **Ninguna**; el QR dispara solo |
 | Cortesía vs pago | El de pago ya funciona; cortesía se mandaba fea (a veces un QR a `photobook.com.mx`). Ahora cortesía = mismo protocolo que Gera + página linda |
-| Varias cabinas | Previsto a futuro; el payload actual no trae nombre de cabina, solo `activarPhotobooth` |
+| Varias cabinas | Previsto a futuro; hoy `c1` fijo `profile6` para esta cabina |
 | Fotos | Carpeta Windows por fecha; su app las guarda |
 | Subdominio | Gera lo crea; app aparte |
 | Contraseña de firma | **Último**; `BOOTH_AUTH_PASSWORD` en `.env`. Sin ella el QR se firma con `""` y la cabina no activará |

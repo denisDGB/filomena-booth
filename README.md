@@ -4,7 +4,7 @@ Genera QRs que la cabina ya sabe leer. El contenido es el de Gera:
 
 `https://thefilomenabooth.pe?auth=<sha1>&j=<json>`
 
-JSON: `c1=activarPhotobooth`, `autoemail=noreply@filomena.studio`, `expiry` ≈ 7 días.
+JSON: `c1=profile6`, `autoemail=noreply@filomena.studio`, `expiry` ≈ 7 días.
 Firma: `sha1(json + BOOTH_AUTH_PASSWORD)` — igual que el PHP.
 
 Sin tope de invitados. Las fotos las sigue guardando su software en Windows.

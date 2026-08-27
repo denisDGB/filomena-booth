@@ -12,7 +12,7 @@ export function boothJsonString({ autoemail = DEFAULT_EMAIL, expiry }) {
   const email = String(autoemail || DEFAULT_EMAIL);
   const exp = Number(expiry);
   if (!Number.isFinite(exp)) throw new Error("expiry required");
-  return `{"c1":"activarPhotobooth","autoemail":${JSON.stringify(email)},"expiry":${Math.floor(exp)}}`;
+  return `{"c1":"profile6","autoemail":${JSON.stringify(email)},"expiry":${Math.floor(exp)}}`;
 }
 
 export function signBoothJson(jsonStr, password) {
