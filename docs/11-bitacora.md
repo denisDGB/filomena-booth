@@ -57,16 +57,17 @@ Contraseña: se deja **para el final**. QR de pago de muestra: **no lo dan**; pr
 - Checklist env: ver [05-env-y-despliegue.md](./05-env-y-despliegue.md).
 - UI panel (mismo día): branding Filomena, canales WA/email, toast, poll de KPIs, invitación full-bleed + QR descargable con marca.
 
-## Firma recibida (23 ago 2026)
+## Firma recibida (23–26 ago 2026)
 
-- Gera confirmó el protocolo PHP y entregó `BOOTH_AUTH_PASSWORD` (valor solo en `.env` / Railway Variables; no documentar el secreto aquí).
-- Tras cargar la clave: reiniciar servicio y **recrear** cortesías.
-- **26 ago 2026:** Gera confirma que `c1` debe ser `profile6` (no `activarPhotobooth`). El PHP inicial era referencia; el QR que funciona en cabina usa `c1` = perfil.
+- Gera confirmó el protocolo PHP. La concatenación es `sha1(jsonStr + password)` sin otra transformación.
+- **26 ago (aclaración):** el password de firma **no** es `profile6`. Es el texto literal `<auth_password>` (con `<>`), “así tal cual… sin modificar nada”. Va en `BOOTH_AUTH_PASSWORD` (env / Railway).
+- `c1` = `profile6` (perfil de cabina). Son dos valores distintos que coinciden en la palabra “profile” solo por casualidad de nombres.
+- Tras cambiar password o `c1`: reiniciar servicio y **recrear** cortesías.
 - Pedidos de alcance (pendientes de armar): logo por ubicación, bloque redes en la invitación (scroll tipo INTEMPO), posible módulo por **eventos** en paralelo; Excel de invitados → incluido en el panel.
 
 ## Pendiente
 
-1. Poner `BOOTH_AUTH_PASSWORD` en Railway (si aún no) + regenerar cortesías  
+1. Confirmar en Railway `BOOTH_AUTH_PASSWORD=<auth_password>` (literal) + regenerar cortesías tras el deploy de `c1=profile6`  
 2. CNAME del subdominio → servicio Railway + `PUBLIC_URL=https://<subdominio>` (siempre con esquema)  
 3. Prueba física en cabina  
 4. Invitación: espacio para logo de venue + redes + scroll hacia el QR  
