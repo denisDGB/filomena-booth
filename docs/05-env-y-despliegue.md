@@ -7,7 +7,7 @@
 | `PORT` | Local: 3001. En Railway lo asigna la plataforma (target del dominio: **8080**) |
 | `ADMIN_SECRET` | Clave del panel `/admin` |
 | `PUBLIC_URL` | Base absoluta de links `/i/…` — **con** `https://`, sin `/` final |
-| `BOOTH_AUTH_PASSWORD` | Secreto de Gera para `sha1`. Vacío = firma `""` (cabina no activa) |
+| `BOOTH_AUTH_PASSWORD` | Literal `<auth_password>` (Gera). Vacío = firma `""` (cabina no activa) |
 | `DATA_DIR` | Carpeta SQLite. Railway: `/data` + volumen montado ahí |
 
 Nunca commitear `.env`.
@@ -42,7 +42,7 @@ Servicio de prueba ya levantado:
    |----------|--------|
    | `ADMIN_SECRET` | Clave fuerte (la del login del panel) |
    | `PUBLIC_URL` | `https://filomena-booth-production.up.railway.app` (**obligatorio** el `https://`; sin esquema Abrir duplica el host y responde `{"error":"not found"}`) |
-   | `BOOTH_AUTH_PASSWORD` | Secreto de firma de Gera (entregado 23 ago 2026; solo en Variables, no en git). Vacío = firma `""` y la cabina no activa |
+   | `BOOTH_AUTH_PASSWORD` | Literal `<auth_password>` (con `<>`; no es `profile6`) |
    | `DATA_DIR` | `/data` |
 
 2. **Volumen** — confirmado: `filomena-booth-volume` (5 GB) enlazado al servicio `filomena-booth`. Mount path debe ser **`/data`** y variable `DATA_DIR=/data`.

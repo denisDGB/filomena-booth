@@ -31,6 +31,9 @@ Igual que `json_encode` de PHP:
 auth = sha1( jsonString + BOOTH_AUTH_PASSWORD )
 ```
 
+`BOOTH_AUTH_PASSWORD` es el texto **literal** `<auth_password>` (con los signos `<>`), tal cual el PHP de Gera — **no** es `profile6`.  
+`profile6` solo va en el campo `c1` del JSON.
+
 Si cambia un espacio, el orden de claves o la clave, el `auth` no coincide y **la cabina ignora el QR**.
 
 Código: `server/booth-url.js`. Check: `npm run check`.

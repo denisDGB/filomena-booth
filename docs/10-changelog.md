@@ -2,7 +2,8 @@
 
 ## 2026-08-26 — Perfil de cabina en QR
 
-- `c1` pasa de `activarPhotobooth` a `profile6` (confirmado por Gera en prueba de cabina). Recrear cortesías.
+- `c1` pasa de `activarPhotobooth` a `profile6` (confirmado por Gera en prueba de cabina).
+- Firma: el secreto es el texto literal `<auth_password>` (no `profile6`). Recrear cortesías tras alinear env + deploy.
 
 ## 2026-08-23 — Firma de cabina + Excel
 
