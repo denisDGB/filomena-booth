@@ -37,8 +37,7 @@ App aparte (Railway). Detalle: [docs/05-env-y-despliegue.md](./docs/05-env-y-des
 
 - Prueba actual: https://filomena-booth-production.up.railway.app/admin  
 - Producción: `PUBLIC_URL=https://invitaciones.photobook.com.mx` (o el subdominio que arme Gera). CNAME → el servicio.  
-- No se toca el PHP de photobook.com.mx.  
-- Mantenimiento acordado: USD 40 / mes (infra Railway la pagan ellos).
+- No se toca el PHP de photobook.com.mx.
 
 ## Qué no hace
 

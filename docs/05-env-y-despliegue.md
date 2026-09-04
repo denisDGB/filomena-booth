@@ -71,4 +71,3 @@ Prueba con Gera: crear cortesía → mandar PNG o URL cruda (`GET /api/booth/pre
 ## Operación / mantenimiento
 
 - Infra Railway: la pagan ellos (cuenta suya; acceso para deploy).
-- Retainer acordado: **USD 40 / mes** — uptime, soporte puntual, ajustes menores (~1–2 h). Features nuevas aparte.

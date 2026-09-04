@@ -46,7 +46,7 @@ Contraseña: se deja **para el final**. QR de pago de muestra: **no lo dan**; pr
 
 - Gera: no ve problema en compartir el secreto de firma (Opción A: nosotros firmamos; la clave va solo en el servidor).
 - Ellos tienen dominio, **sin** hosting: se pide que nosotros levantemos la app.
-- Acordado: Railway lo pagan ellos; retainer de mantenimiento **USD 40 / mes** (uptime, soporte puntual, ajustes menores; features nuevas aparte).
+- Acordado: Railway lo pagan ellos.
 - `/admin` es la **ruta** del panel; el subdominio es otro (ej. `invitaciones.…`).
 
 ## Railway de prueba (22 ago 2026)
